@@ -19,6 +19,7 @@ Bullet::Bullet(float angle, int vel, float x, float y)
     this->m_X = x;
     this->m_Y = y;
     this->m_Angle = angle;
+    this->isAlive = true;
 
     //SDL_Log("Velocities: %f and %f", m_VelX, m_VelY);
 }
@@ -36,12 +37,14 @@ void Bullet::Update()
     SDL_Log("Bullet X: %f | Bullet Y: %f", m_X, m_Y);
 
     if(this->m_Y < 10)
-        this->Kill();
+        this->isAlive = false;
 }
 
 void Bullet::Render()
 {
     SDL_Rect rekt = {0, 0, m_Sprite.m_Width, m_Sprite.m_Height};
+
+    this->m_Sprite.ARender(m_X, m_Y, rekt, m_Angle, NULL, SDL_FLIP_NONE);
 }
 
 void Bullet::Kill()

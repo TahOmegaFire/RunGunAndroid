@@ -15,6 +15,8 @@ public:
     void Update();
     void Render();
     void Kill();
+    
+    bool isAlive;
 
 private:
     float m_VelX, m_VelY, m_X, m_Y, m_Angle;

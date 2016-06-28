@@ -1,9 +1,11 @@
 #include "Player.h"
 #include <cmath>
 
+extern SDL_Rect screenRect;
+
 Player::Player()
 {
-    m_X = 190;
+    m_X = 190; //Change to initialization list
     m_Y = 800;
 
     this->SetSpriteTexture("Images/Test/PlayerTest.png");
@@ -39,7 +41,10 @@ void Player::Update(float touch_pointX, float touch_pointY, bool was_touched)
 
     if(was_touched)
     {
-        if(touch_pointX > (m_X + 150) && touch_pointY < m_Y)
+        float cX = (touch_pointX * 1920) / screenRect.w;
+        float cY = (touch_pointY * 1080) / screenRect.h;
+
+        if(cX > (m_X + 150) && cY < m_Y)
         {
             float sideA = (float)touch_pointX - (float)(m_X + 150);
             float sideB = (float)m_Y - (float)touch_pointY;
@@ -58,10 +63,15 @@ void Player::Update(float touch_pointX, float touch_pointY, bool was_touched)
         for(int i = 0; i < bulletList.size(); i++)
         {
             bulletList[i]->Update();
+            if(!bulletList[i]->isAlive)
+            {
+                delete bulletList[i];
+                bulletList.erase(bulletList.begin() + i);
+            }
         }
     }
-    else
-        SDL_Log("List is empty.");
+
+
 }
 
 void Player::Render()

@@ -26,7 +26,6 @@ int main(int argc, char* args[])
 
     SDL_Log("SDL Init.");
 
-    //SDL_Point touchPoint = { screenRect.w / 2, screenRect.h / 2 };
     float touchPointX, touchPointY;
 
     Background testBg;
@@ -35,7 +34,6 @@ int main(int argc, char* args[])
 
     bool exitApp = false;
     bool touchedScreen = false;
-    //bool firstRun = true;
 
     SDL_Event event;
 
